@@ -9,15 +9,17 @@
     "build:dev": "webpack --mode development",
     "watch": "npm run build:dev -- --watch",
     "start": "node .",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "storybook": "start-storybook -s ./.storybook/static -p 6006",
+    "build-storybook": "build-storybook -s ./.storybook/static"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.27.2",
     "babel-loader": "^8.1.0",
     "core-js": "^3.23.5",
     "express": "^4.18.1",
+    "googleapis": "^105.0.0",
     "prop-types": "^15.8.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",

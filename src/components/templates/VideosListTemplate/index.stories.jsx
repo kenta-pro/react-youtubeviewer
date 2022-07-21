@@ -2,6 +2,7 @@ import React from "react";
 import { actions } from "@storybook/addon-actions";
 import styled, { css } from "styled-components";
 import VideosListTemplate from ".";
+import Typography from "~/components/atoms/Typography";
 
 export default { title: "templates/VideosListTemplate" };
 
@@ -31,6 +32,7 @@ const VideosList = styled.div`
 export const Default = () => (
   <VideosListTemplate
     headerContents={<Header>header</Header>}
+    titleContents={<Typography>タイトル</Typography>}
     searchFormContents={<SearchForm>searchForm</SearchForm>}
     videosListContents={<VideosList>videosList</VideosList>}
     {...actions("onScrollEnd")}

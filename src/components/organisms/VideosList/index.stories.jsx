@@ -14,3 +14,7 @@ continuationLoading.story = { name: "続き取得中" };
 
 export const notFound = () => <VideosList videos={[]} />;
 notFound.story = { name: "0件" };
+
+export const withFavoriteButton = () => (
+  <VideosList videos={videos} withFavoriteButton />
+);

@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import Image from "~/components/atoms/Image";
 import Typography from "~/components/atoms/Typography";
+import styled, { css } from "styled-components";
+import FavoriteButton from "~/components/molecules/FavoriteButton";
 
 const Root = styled.div`
   cursor: pointer;
@@ -45,6 +46,12 @@ const ViewCount = styled(Typography)`
   margin-top: 5px;
 `;
 
+const StyledFavoriteButton = styled(FavoriteButton)`
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+`;
+
 const VideosListItemPresenter = ({
   className,
   onClick,
@@ -52,6 +59,8 @@ const VideosListItemPresenter = ({
   title,
   description,
   viewCount,
+  withFavoriteButton,
+  videoId,
 }) => (
   <Root className={className} onClick={onClick}>
     <Thumbnail>
@@ -66,6 +75,8 @@ const VideosListItemPresenter = ({
         {viewCount}
         回視聴
       </ViewCount>
+
+      {withFavoriteButton && <StyledFavoriteButton videoId={videoId} />}
     </InfoWrapper>
   </Root>
 );
@@ -77,11 +88,15 @@ VideosListItemPresenter.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   viewCount: PropTypes.string.isRequired,
+  withFavoriteButton: PropTypes.bool,
+  videoId: PropTypes.string,
 };
 
 VideosListItemPresenter.defaultProps = {
   className: "",
   onClick: null,
+  withFavoriteButton: false,
+  videoId: "",
 };
 
 const VideosListItemContainer = ({
@@ -97,6 +112,7 @@ const VideosListItemContainer = ({
     },
     statistics: { viewCount },
   },
+  withFavoriteButton,
   presenter,
 }) => {
   const history = useHistory();
@@ -109,6 +125,8 @@ const VideosListItemContainer = ({
     thumbnailUrl,
     description,
     viewCount,
+    withFavoriteButton,
+    videoId: id,
   });
 };
 
@@ -129,10 +147,12 @@ VideosListItemContainer.propTypes = {
       viewCount: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
+  withFavoriteButton: PropTypes.bool,
 };
 
 VideosListItemContainer.defaultProps = {
   className: "",
+  withFavoriteButton: false,
 };
 
 export default (props) => (

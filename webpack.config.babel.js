@@ -11,6 +11,22 @@ export default (env, args) => {
     },
   ];
 
+  if (!isProduction) {
+    rules.push({
+      enforce: "pre",
+      test: /\.jsx?$/,
+      exclude: /node_modules/,
+      use: [
+        {
+          loader: "eslint-loader",
+          options: {
+            configFile: path.join(__dirname, "src/.eslintrc.js"),
+          },
+        },
+      ],
+    });
+  }
+
   return {
     devtool,
     entry: "./src/entries/app.jsx",

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import useOnScrollEnd from "~/utils/useOnScrollEnd";
 
 const Root = styled.div`
   width: 100%;
@@ -29,22 +30,7 @@ const VideosListTemplate = ({
   videosListContents,
   onScrollEnd,
 }) => {
-  useEffect(() => {
-    if (!onScrollEnd) {
-      return;
-    }
-    const scrollHandler = ({ target: { scrollingElement } }) => {
-      const { scrollTop, scrollHeight, clientHeight } = scrollingElement;
-      if (scrollTop < scrollHeight - clientHeight) {
-        return;
-      }
-      onScrollEnd();
-    };
-    window.document.addEventListener("scroll", scrollHandler);
-    return () => {
-      window.document.removeEventListener("scroll", scrollHandler);
-    };
-  }, [onScrollEnd]);
+  useOnScrollEnd(onScrollEnd);
   return (
     <Root>
       <HeaderWrapper>{headerContents}</HeaderWrapper>

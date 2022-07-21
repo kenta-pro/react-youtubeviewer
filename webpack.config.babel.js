@@ -1,4 +1,4 @@
-import webpack from "webpack";
+import { IgnorePlugin } from "webpack";
 import path from "path";
 
 export default (env, args) => {
@@ -26,5 +26,6 @@ export default (env, args) => {
       },
       extensions: [".js", ".jsx"],
     },
+    plugins: [new IgnorePlugin(/^\.\/locale$/, /moment$/)],
   };
 };
